@@ -14,7 +14,7 @@ console.log(data)
 
 <template>
     <div v-if="isLoading">Cargando...</div>
-    <div v-if="isError">Error: {{ errorMessage }}</div>
+    <div v-else-if="isError">Error: {{ errorMessage }}</div>
     <div v-else-if="data">
         <h1>{{ data.name }}</h1>
         <img :src="data.image" :alt="data.name" width="120" />

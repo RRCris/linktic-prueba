@@ -6,20 +6,26 @@ export function useAPI<T>(
   endpoint: string,
   schema: z.ZodType<T>,
   autoFetch = true,
-  queryParams?: Record<string, string>
+  queryParams?: Record<string, string | number>
 ) {
   const data = ref<T | null>(null);
   const isLoading = ref(true);
   const isError = ref(false);
   const errorMessage = ref("");
 
-  const fetctData = async () => {
+  const fetctData = async (newParams?: Record<string, string | number>) => {
     isLoading.value = true;
     isError.value = false;
 
     try {
+      const effectiveParams = newParams || queryParams;
       const queryString =
-        "?" + queryParams ? new URLSearchParams(queryParams).toString() : "";
+        "?" +
+        (queryParams
+          ? new URLSearchParams(
+              effectiveParams as Record<string, string>
+            ).toString()
+          : "");
       const res = await (await fetch(BASE_URL + endpoint + queryString)).json();
       const { success, data: dataParse, error } = schema.safeParse(res);
       if (!success) {
