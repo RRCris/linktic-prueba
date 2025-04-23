@@ -3,8 +3,8 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import CharacterDetails from "../views/CharacterDetails.vue";
+
+import DefaultLayout from "../views/layouts/DefaultLayout.vue";
 
 export const ROUTES = {
   HOME: "/",
@@ -14,13 +14,19 @@ export const ROUTES = {
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    name: "Home",
-    component: HomeView,
-  },
-  {
-    path: "/character/:id",
-    name: "CharacterDetail",
-    component: CharacterDetails,
+    component: DefaultLayout,
+    children: [
+      {
+        path: "",
+        name: "home",
+        component: import("../views/HomeView.vue"),
+      },
+      {
+        path: "/character/:id",
+        name: "CharacterDetail",
+        component: import("../views/CharacterDetails.vue"),
+      },
+    ],
   },
 ];
 

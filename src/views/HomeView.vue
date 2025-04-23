@@ -6,7 +6,6 @@ import { useObserver } from '../composables/useObserver';
 //Components
 import FilterCharacters from '../components/Home/FilterCharacters.vue';
 import CardCharacter from '../components/Characters/CardCharacter.vue';
-import UIButton from '../components/UI/UIButton.vue';
 
 const page = ref(1)
 const { path, schema } = API_MAP.character
@@ -39,29 +38,34 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 </script>
 
 <template>
-    <h1 class="bg-red-300">Listado de Personajes</h1>
-    <UIButton>Hola</UIButton>
-    <!-- filtros -->
-    <FilterCharacters @search="onSearch" />
+    <header>
+        <h1 class="text-6xl text-center">Listado de Personajes</h1>
+        <p class="text-lg text-center">Aqui pudes buscar tus personajes favoritos de <strong>ricky y morthy</strong></p>
+    </header>
+    <main>
 
-    <!-- informacion -->
-    <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
-    <div v-else-if="isError"> {{ errorMessage }}</div>
-    <div v-else-if="itemsLoadings">
+        <!-- filtros -->
+        <FilterCharacters @search="onSearch" />
 
-        <p>Pagina #{{ page }}</p>
-        <!-- listado de personajes -->
-        <p>Cargados: {{ itemsLoadings.length }} Personajes</p>
-        <ul>
-            <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
-                    :delay="(i - startDelay) * 160" />
-            </TransitionGroup>
-        </ul>
-    </div>
-    <!-- sentinela -->
-    <div ref="observerTarget" style="height: 40px; margin-top: 20px;" />
-    <div v-if="isLoading">Cargando más...</div>
+        <!-- informacion -->
+        <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
+        <div v-else-if="isError"> {{ errorMessage }}</div>
+        <div v-else-if="itemsLoadings">
+
+            <p>Pagina #{{ page }}</p>
+            <!-- listado de personajes -->
+            <p>Cargados: {{ itemsLoadings.length }} Personajes</p>
+            <ul>
+                <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
+                        :delay="(i - startDelay) * 160" />
+                </TransitionGroup>
+            </ul>
+        </div>
+        <!-- sentinela -->
+        <div ref="observerTarget" style="height: 40px; margin-top: 20px;" />
+        <div v-if="isLoading">Cargando más...</div>
+    </main>
 
 
 
