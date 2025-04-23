@@ -4,8 +4,10 @@ import { ROUTES } from '../router';
 import { useAPI } from '../composables/useAPI';
 import { API_MAP } from '../constants/apiRoutes';
 import { computed, onMounted, ref } from 'vue';
+import debounce from "lodash/debounce"
 
 const nameFilter = ref('')
+const speciesFilter = ref("")
 const page = ref(1)
 const router = useRouter()
 const { path, schema } = API_MAP.character
@@ -38,6 +40,18 @@ const goNextPage = () => {
     }
 }
 
+const onSearch = debounce(() => {
+    page.value = 1
+    accumulative.value = []
+
+    refetch({
+        page: page.value,
+        name: nameFilter.value.trim(),
+        species: speciesFilter.value.trim()
+    })
+
+}, 800)
+
 
 const itemsLoadings = computed(() => accumulative.value.map(dt => dt.results).flat())
 const startDelay = computed(() => itemsLoadings.value.length - 20)
@@ -46,13 +60,26 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 </script>
 
 <template>
-    <input type="text" v-model="nameFilter" />
+    <h1>Listado de Personajes</h1>
+    <!-- filtros -->
+    <input type="text" v-model="nameFilter" @input="onSearch" placeholder="Buscar por nombre" class="SearchName" />
+    <select v-model="speciesFilter" @change="onSearch" style="margin-bottom: 16px;">
+        <option value="">Todas las especies</option>
+        <option>Human</option>
+        <option>Alien</option>
+        <option>Humanoid</option>
+        <option>Robot</option>
+        <option>Cronenberg</option>
+        <option>Animal</option>
+    </select>
+
+    <!-- informacion -->
     <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
-    <div v-else-if="isError">Error: {{ errorMessage }}</div>
+    <div v-else-if="isError"> {{ errorMessage }}</div>
     <div v-else-if="itemsLoadings">
 
-        <h1>Listado de Personajes</h1>
         <p>Pagina {{ page }}</p>
+        <!-- listado de personajes -->
         <p>{{ itemsLoadings.length }}</p>
         <ul>
             <TransitionGroup name="slide-bounce" tag="ul">
@@ -64,6 +91,7 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
             </TransitionGroup>
         </ul>
     </div>
+    <!-- sentinela -->
     <div ref="observerTarget" style="height: 40px; margin-top: 20px;" />
     <div v-if="isLoading">Cargando más...</div>
 
@@ -72,6 +100,11 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 </template>
 
 <style scoped>
+.SearchName {
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
 ul {
     list-style: none;
     padding: 0;

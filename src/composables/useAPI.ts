@@ -20,6 +20,7 @@ export function useAPI<T>(
     isError.value = false;
 
     try {
+      //Preparat Peticion
       const effectiveParams = newParams || queryParams;
       const queryString =
         "?" +
@@ -28,15 +29,26 @@ export function useAPI<T>(
               effectiveParams as Record<string, string>
             ).toString()
           : "");
-      const res = await (await fetch(BASE_URL + endpoint + queryString)).json();
-      const { success, data: dataParse, error } = schema.safeParse(res);
+
+      //Lanzar Peticion
+      const res = await fetch(BASE_URL + endpoint + queryString);
+      const json = await res.json();
+
+      //Evaluar Respuesta
+      if (res.status === 404)
+        throw new Error("No se encontraron coincidencias");
+      const { success, data: dataParse } = schema.safeParse(json);
       if (!success) {
-        throw new Error(`"Respuesta no valida" : ${error}`);
+        throw new Error(`"Respuesta no valida"`);
       }
+
+      //asignar respuestas
       data.value = dataParse;
       accumulative.value = [...accumulative.value, data.value];
     } catch (err: any) {
+      //asignar valores de error
       isError.value = true;
+      console.warn(err);
       errorMessage.value = err.message || "Error Desconocido";
     } finally {
       isLoading.value = false;
