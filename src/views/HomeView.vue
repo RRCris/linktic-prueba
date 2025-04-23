@@ -1,26 +1,25 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import type { tCharacter } from '../@types/models';
 import {  useRouter } from 'vue-router';
 import { ROUTES } from '../router';
-import { getCharacters } from '../services/api';
+import { useAPI } from '../composables/useAPI';
+import { API_MAP } from '../constants/apiRoutes';
 
-    const characters = ref<tCharacter[]>([])
     const router = useRouter()
+    const {path,schema}= API_MAP.character
+    const {data:characters} = useAPI(path,schema)
 
     const goToDetails =(id:number)=>{
         router.push(ROUTES.CHARACTER_DETAILS(id))
     }
 
-    onMounted(async function() {
-        characters.value = await getCharacters()
-    })
+
+    
 </script>
 
 <template>
     <h1>Listado de Personajes</h1>
     <ul>
-        <li v-for="character in characters" :key="character.id" @click="goToDetails(character.id)">
+        <li v-for="character in characters?.results" :key="character.id" @click="goToDetails(character.id)">
             <img :src="character.image" :alt="character.name" width="80"/>
             <p>{{ character.name }}</p>
         </li>

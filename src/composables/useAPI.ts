@@ -5,7 +5,8 @@ import type { z } from "zod";
 export function useAPI<T>(
   endpoint: string,
   schema: z.ZodType<T>,
-  autoFetch = false
+  autoFetch = true,
+  queryParams?: Record<string, string>
 ) {
   const data = ref<T | null>(null);
   const isLoading = ref(true);
@@ -17,8 +18,9 @@ export function useAPI<T>(
     isError.value = false;
 
     try {
-      const res = await (await fetch(BASE_URL + endpoint)).json();
-      console.log(res, "res");
+      const queryString =
+        "?" + queryParams ? new URLSearchParams(queryParams).toString() : "";
+      const res = await (await fetch(BASE_URL + endpoint + queryString)).json();
       const { success, data: dataParse, error } = schema.safeParse(res);
       if (!success) {
         throw new Error(`"Respuesta no valida" : ${error}`);
