@@ -2,7 +2,7 @@
 </script>
 <template>
     <div class="min-h-screen flex flex-col">
-        <div class="grow">
+        <div class="grow p-2 md:p-5 lg:p-10 max-w-[1300px] w-full mx-auto">
             <router-view></router-view>
         </div>
         <footer className="bg-gray-800 text-white py-5 mt-8 ">

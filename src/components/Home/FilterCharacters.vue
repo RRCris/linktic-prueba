@@ -30,7 +30,9 @@ const speciesOptions = ref([
 </script>
 
 <template>
-    <UITextInput v-model="nameFilter" @input="onSearch" placeholder="Buscar por nombre" />
-    <UISelect v-model="speciesFilter" :options="speciesOptions" @update:modelValue="onSearch" />
+    <div class="flex flex-col gap-3 md:flex-row my-6">
+        <UITextInput v-model="nameFilter" @input="onSearch" placeholder="Buscar por nombre" />
+        <UISelect v-model="speciesFilter" :options="speciesOptions" @update:modelValue="onSearch" />
+    </div>
 
 </template>

@@ -6,6 +6,7 @@ import { useObserver } from '../composables/useObserver';
 //Components
 import FilterCharacters from '../components/Home/FilterCharacters.vue';
 import CardCharacter from '../components/Characters/CardCharacter.vue';
+import UISpinner from '../components/UI/UISpinner.vue';
 
 const page = ref(1)
 const { path, schema } = API_MAP.character
@@ -48,23 +49,24 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
         <FilterCharacters @search="onSearch" />
 
         <!-- informacion -->
-        <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
-        <div v-else-if="isError"> {{ errorMessage }}</div>
+        <div v-if="isLoading && accumulative.length === 0" class="h-screen flex flex-col items-center justify-center">
+            <p class="font-bold">Cargando Contenido</p>
+            <UISpinner />
+        </div>
+        <div v-else-if="isError" class="h-screen flex flex-col items-center justify-center"> {{ errorMessage }}</div>
         <div v-else-if="itemsLoadings">
-
-            <p>Pagina #{{ page }}</p>
             <!-- listado de personajes -->
-            <p>Cargados: {{ itemsLoadings.length }} Personajes</p>
-            <ul>
-                <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
-                        :delay="(i - startDelay) * 160" />
-                </TransitionGroup>
-            </ul>
+            <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
+                    :delay="(i - startDelay) * 160" />
+            </TransitionGroup>
         </div>
         <!-- sentinela -->
         <div ref="observerTarget" style="height: 40px; margin-top: 20px;" />
-        <div v-if="isLoading">Cargando más...</div>
+        <div v-if="isLoading" class="flex flex-col items-center justify-center">
+            <p class="font-bold">Cargando Contenido</p>
+            <UISpinner />
+        </div>
     </main>
 
 
