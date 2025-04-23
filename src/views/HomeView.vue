@@ -4,8 +4,9 @@ import { API_MAP } from '../constants/apiRoutes';
 import { computed, ref } from 'vue';
 import { useObserver } from '../composables/useObserver';
 //Components
-import Filter from '../components/Home/Filter.vue';
+import FilterCharacters from '../components/Home/FilterCharacters.vue';
 import CardCharacter from '../components/Characters/CardCharacter.vue';
+import UIButton from '../components/UI/UIButton.vue';
 
 const page = ref(1)
 const { path, schema } = API_MAP.character
@@ -39,8 +40,9 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 
 <template>
     <h1 class="bg-red-300">Listado de Personajes</h1>
+    <UIButton>Hola</UIButton>
     <!-- filtros -->
-    <Filter @search="onSearch" />
+    <FilterCharacters @search="onSearch" />
 
     <!-- informacion -->
     <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
@@ -51,7 +53,7 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
         <!-- listado de personajes -->
         <p>Cargados: {{ itemsLoadings.length }} Personajes</p>
         <ul>
-            <TransitionGroup name="slide-bounce" tag="ul">
+            <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
                     :delay="(i - startDelay) * 160" />
             </TransitionGroup>
