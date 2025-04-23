@@ -9,11 +9,13 @@ export function useAPI<T>(
   queryParams?: Record<string, string | number>
 ) {
   const data = ref<T | null>(null);
-  const isLoading = ref(true);
+  const isLoading = ref(false);
   const isError = ref(false);
   const errorMessage = ref("");
+  const accumulative = ref<T[]>([]);
 
   const fetctData = async (newParams?: Record<string, string | number>) => {
+    if (isLoading.value === true) return;
     isLoading.value = true;
     isError.value = false;
 
@@ -32,6 +34,7 @@ export function useAPI<T>(
         throw new Error(`"Respuesta no valida" : ${error}`);
       }
       data.value = dataParse;
+      accumulative.value = [...accumulative.value, data.value];
     } catch (err: any) {
       isError.value = true;
       errorMessage.value = err.message || "Error Desconocido";
@@ -45,6 +48,7 @@ export function useAPI<T>(
 
   return {
     data,
+    accumulative,
     isLoading,
     isError,
     errorMessage,
