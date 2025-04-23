@@ -9,7 +9,7 @@ import { computed, onMounted, ref } from 'vue';
 const page = ref(1)
 const router = useRouter()
 const { path, schema } = API_MAP.character
-const { data: characters, isLoading, errorMessage, isError, refetch, accumulative } = useAPI(path, schema, true, { page: page.value })
+const { data, isLoading, errorMessage, isError, refetch, accumulative } = useAPI(path, schema, true, { page: page.value })
 
 const observerTarget = ref<HTMLDivElement | null>(null)
 onMounted(() => {
@@ -32,14 +32,12 @@ const goToDetails = (id: number) => {
 }
 
 const goNextPage = () => {
-    page.value++
-    refetch({ page: page.value })
+    if (data.value?.info.next) {
+        page.value++
+        refetch({ page: page.value })
+    }
 }
-const goPrevPage = () => {
-    page.value--
-    refetch({ page: page.value })
 
-}
 
 const itemsLoadings = computed(() => accumulative.value.map(dt => dt.results).flat())
 
@@ -49,7 +47,7 @@ const itemsLoadings = computed(() => accumulative.value.map(dt => dt.results).fl
 <template>
     <div v-if="isLoading && accumulative.length === 0">Cargando...</div>
     <div v-else-if="isError">Error: {{ errorMessage }}</div>
-    <div v-else-if="characters">
+    <div v-else-if="itemsLoadings">
 
         <h1>Listado de Personajes</h1>
         <p>Pagina {{ page }}</p>
@@ -62,8 +60,7 @@ const itemsLoadings = computed(() => accumulative.value.map(dt => dt.results).fl
         </ul>
     </div>
     <div ref="observerTarget" style="height: 40px;" />
-    <button @click="goPrevPage">Pagina Anterior</button>
-    <button @click="goNextPage">Pagina Siguiente</button>
+
 
 </template>
 
