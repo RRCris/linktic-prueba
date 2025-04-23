@@ -38,7 +38,7 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 </script>
 
 <template>
-    <h1>Listado de Personajes</h1>
+    <h1 class="bg-red-300">Listado de Personajes</h1>
     <!-- filtros -->
     <Filter @search="onSearch" />
 
