@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const schema_character = z.object({
+export const sCharacter = z.object({
   id: z.number(),
   name: z.string(),
   status: z.enum(["Alive", "Dead", "unknown"]),
@@ -9,4 +9,4 @@ export const schema_character = z.object({
   image: z.string().url(),
 });
 
-export type type_character = z.infer<typeof schema_character>;
+export type tCharacter = z.infer<typeof sCharacter>;

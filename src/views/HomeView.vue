@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import type { type_character } from '../@types/models';
+import type { tCharacter } from '../@types/models';
 import {  useRouter } from 'vue-router';
 import { ROUTES } from '../router';
 import { getCharacters } from '../services/api';
 
-    const characters = ref<type_character[]>([])
+    const characters = ref<tCharacter[]>([])
     const router = useRouter()
 
     const goToDetails =(id:number)=>{
