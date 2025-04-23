@@ -5,6 +5,7 @@ import {
 } from "vue-router";
 
 import DefaultLayout from "../views/layouts/DefaultLayout.vue";
+import NotFound from "../views/defaults/NotFound.vue";
 
 export const ROUTES = {
   HOME: "/",
@@ -28,6 +29,7 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
+  { path: "/:pathMath(.*)*", name: "NotFound", component: NotFound },
 ];
 
 const router = createRouter({
