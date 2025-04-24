@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { ROUTES } from '../../router';
-import type { tCharacter } from '../../@types/models';
+import { ROUTES } from '../../../router';
+import type { tCharacter } from '../../../@types/models';
 import { computed } from 'vue';
 
 const { character } = defineProps<{ character: tCharacter, delay: number }>()

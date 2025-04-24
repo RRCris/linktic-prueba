@@ -5,7 +5,7 @@ import { computed, ref } from 'vue';
 import { useObserver } from '../composables/useObserver';
 //Components
 import FilterCharacters from '../components/Home/FilterCharacters.vue';
-import CardCharacter from '../components/Characters/CardCharacter.vue';
+import CardCharacter from '../components/Characters/CardCharacter/CardCharacter.vue';
 import UISpinner from '../components/UI/UISpinner.vue';
 
 const page = ref(1)
