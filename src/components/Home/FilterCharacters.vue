@@ -7,6 +7,7 @@ import UISelect from '../UI/UISelect/UISelect.vue';
 const nameFilter = ref('')
 const speciesFilter = ref("")
 
+
 const emit = defineEmits<{ (e: "search", filtros: Record<string, string>): void }>()
 
 const onSearch = debounce(() => {

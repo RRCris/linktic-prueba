@@ -11,6 +11,7 @@ import UISpinner from '../components/UI/UISpinner.vue';
 const page = ref(1)
 const { path, schema } = API_MAP.character
 const { data, isLoading, errorMessage, isError, refetch, accumulative } = useAPI(path, schema, true, { page: page.value })
+const filters = ref<Record<string, string | number>>({})
 
 
 
@@ -18,16 +19,21 @@ const { data, isLoading, errorMessage, isError, refetch, accumulative } = useAPI
 const goNextPage = () => {
     if (data.value?.info.next) {
         page.value++
-        refetch({ page: page.value })
+
+        //busco con los filtros actuales pero en la siguiente pagina
+        refetch({ ...filters.value, page: page.value })
     }
 }
 const observerTarget = useObserver<HTMLDivElement>(goNextPage)
 
 
 const onSearch = (params: Record<string, string>) => {
+    filters.value = params // guardo filtros
+    //reinicio todo
     page.value = 1
     accumulative.value = []
 
+    //hago la peticion
     refetch(params)
 }
 
