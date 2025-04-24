@@ -13,7 +13,7 @@ describe("UIButton.vue", () => {
     });
     const button = screen.getByRole("button");
     expect(button).toHaveTextContent(text);
-    expect(button.className).toContain("bg-theme-color");
+    expect(button.className).toContain("bg-[var(--primary-color)]");
     expect(button.className).toContain("text-white");
   });
 
@@ -30,7 +30,7 @@ describe("UIButton.vue", () => {
     const button = screen.getByRole("button");
     expect(button).toHaveTextContent(text);
     //verifico que no tenga los estilos de primary
-    expect(button.className).not.toContain("bg-theme-color");
+    expect(button.className).not.toContain("var(--primary-color)");
     expect(button.className).not.toContain("text-white");
 
     //verifico que  tenga los estilos de secondary
@@ -45,7 +45,7 @@ describe("UIButton.vue", () => {
       template: `<UIButton estilo="inexistente" >${text}</UIButton>`,
     });
     const button = screen.getByRole("button");
-    expect(button.className).not.toContain("bg-theme-color");
+    expect(button.className).not.toContain("var(--primary-color)");
     expect(button.className).not.toContain("bg-gray-200");
   });
 });
