@@ -36,8 +36,8 @@ const updateValue = (newValue: string | number | boolean) => {
           cursor-default
           focus:outline-none
           focus:ring-1
-          focus:ring-[#145E1E]
-          focus:border-[#145E1E]
+          focus:ring-[var(--primary-color)]
+          focus:border-[var(--primary-color)]
           sm:text-sm
         " aria-haspopup="listbox" :aria-expanded="isOpen" aria-labelledby="listbox-label" @click="isOpen = !isOpen">
             <span class="block truncate">{{ selectedOptionLabel }}</span>
@@ -72,10 +72,10 @@ const updateValue = (newValue: string | number | boolean) => {
             pl-3
             pr-9
             hover:bg-gray-100
-          " :class="{ 'font-semibold bg-[#145E1E] text-white': modelValue === option.value }" id="listbox-option-0"
-                role="option" @click="updateValue(option.value)">
+          " :class="{ 'font-semibold bg-[var(--primary-color)] text-white': modelValue === option.value }"
+                id="listbox-option-0" role="option" @click="updateValue(option.value)">
                 <span class="block truncate" :class="{ 'font-semibold': modelValue === option.value }">{{ option.label
-                    }}</span>
+                }}</span>
 
                 <span v-if="modelValue === option.value"
                     class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">

@@ -10,7 +10,7 @@
         pl-2
         outline-none
         border-b-2
-        focus:border-[#145E1E]
+        focus:border-[var(--primary-color)]
       " :value="modelValue" @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         v-bind="$attrs">
 </template>

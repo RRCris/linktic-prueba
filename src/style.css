@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --primary-color: #145e1e;
+  /* --primary-color: #145e1e; */
+  --primary-color: #cbdf19;
 }
 
 [data-theme="blue"] {
@@ -10,8 +11,4 @@
 
 [data-theme="red"] {
   --color-primary: #dc2626;
-}
-
-.bg-theme-color {
-  background-color: var(--primary-color);
 }
