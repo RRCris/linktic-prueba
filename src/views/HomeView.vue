@@ -7,6 +7,7 @@ import { useObserver } from '../composables/useObserver';
 import FilterCharacters from '../components/Home/FilterCharacters.vue';
 import CardCharacter from '../components/Characters/CardCharacter/CardCharacter.vue';
 import UISpinner from '../components/UI/UISpinner.vue';
+import UIButton from '../components/UI/UIButton/UIButton.vue';
 
 const page = ref(1)
 const { path, schema } = API_MAP.character
@@ -45,6 +46,7 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
 </script>
 
 <template>
+    <UIButton>Hola</UIButton>
     <header>
         <h1 class="text-6xl text-center">Listado de Personajes</h1>
         <p class="text-lg text-center">Aqui pudes buscar tus personajes favoritos de <strong>ricky y morthy</strong></p>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const estilosDisponibles: Record<string, string> = {
-    primary: 'bg-[#145E1E] text-white hover:bg-green-600',
+    primary: 'bg-theme-color text-white hover:bg-green-600',
     secondary: 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:text-gray-800 border border-gray-300',
 };
 defineProps({
