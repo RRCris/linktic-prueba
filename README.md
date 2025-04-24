@@ -6,6 +6,8 @@ Este proyecto es una aplicación web desarrollada con Vue.js, TypeScript y Vite,
 
 Como desarrollador con una sólida experiencia en TypeScript, React y Next.js, aproveché la oportunidad de adaptarme a Vue.js para este proyecto. Esta aplicación demuestra mi capacidad para aprender y aplicar rápidamente nuevas tecnologías para ofrecer una solución de alta calidad.
 
+---
+
 **Características Clave**
 
 - **Listado de Personajes:** Muestra una lista completa de los personajes de la API de Rick y Morty.
@@ -21,6 +23,10 @@ Como desarrollador con una sólida experiencia en TypeScript, React y Next.js, a
 - **Layouts:** Se utilizan los "layouts" para estructurar la interfaz de usuario y mantener elementos comunes en diferentes vistas.
 - **Pruebas:** Se implementan pruebas unitarias exhaustivas utilizando Vitest y @testing-library/vue para garantizar la calidad y el mantenimiento del código.
 - **Estilos:** Se utiliza Tailwind CSS para el estilo, lo que proporciona un enfoque "utility-first" y un rápido desarrollo de la interfaz de usuario.
+- **Temas Dinámicos con Selector de Colores:** La aplicación permite cambiar el color principal de la interfaz mediante un selector de temas. Se utilizan variables CSS (`--primary-color`, etc.) combinadas con utilidades extendidas de Tailwind para actualizar colores de fondo, bordes, foco y más en tiempo real.
+- **Modo Claro/Oscuro:** Se incluye un switch global para cambiar entre modo claro y oscuro, utilizando la clase `dark` y utilidades de Tailwind como `dark:bg-gray-800` o `dark:text-white`. Esto mejora la accesibilidad y personalización de la experiencia del usuario.
+
+---
 
 **Decisiones Técnicas y Justificaciones**
 
@@ -33,6 +39,8 @@ Como desarrollador con una sólida experiencia en TypeScript, React y Next.js, a
 - **Modularización:** Promueve la reutilización y el mantenimiento del código, lo que facilita el desarrollo futuro.
 - **Tailwind CSS:** Acelera el estilo y garantiza la coherencia.
 - **Vitest y @testing-library/vue:** Elegidos para realizar pruebas unitarias eficientes dentro del ecosistema de Vue.js.
+- **Temas con Variables CSS y Tailwind v4.1:** Se eligió extender Tailwind utilizando variables CSS para lograr un sistema de temas dinámico, escalable y de fácil mantenimiento. Esta decisión permite cambiar el color principal globalmente sin modificar cada componente manualmente.
+- **Modo Oscuro con Tailwind:** Se habilitó el modo oscuro mediante la clase `dark` en el HTML, siguiendo las recomendaciones de Tailwind v4.1. Esto permite aplicar estilos alternativos a través de utilidades `dark:` sin duplicar lógica o clases.
 
 **Arquitectura**
 
