@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { debounce } from 'lodash';
 import { ref } from 'vue';
-import UITextInput from '../UI/UITextInput/UITextInput.vue';
 import UISelect from '../UI/UISelect/UISelect.vue';
+import UITextInput from '../UI/UITextInput/UITextInput.vue';
 
 const nameFilter = ref('')
 const speciesFilter = ref("")

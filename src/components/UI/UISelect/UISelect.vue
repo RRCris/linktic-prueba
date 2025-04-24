@@ -25,6 +25,7 @@ const updateValue = (newValue: string | number | boolean) => {
     <div class="relative">
         <button type="button" class="
           bg-white
+          dark:bg-gray-800
           border
           border-gray-300
           rounded-md
@@ -56,6 +57,7 @@ const updateValue = (newValue: string | number | boolean) => {
           mt-1
           w-full
           bg-white
+          dark:bg-gray-800
           shadow-lg
           rounded-md
           max-h-56
@@ -65,6 +67,7 @@ const updateValue = (newValue: string | number | boolean) => {
         " tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">
             <li v-for="(option, index) in options" :key="index" class="
             text-gray-900
+            dark:text-white
             cursor-default
             select-none
             relative
@@ -75,7 +78,7 @@ const updateValue = (newValue: string | number | boolean) => {
           " :class="{ 'font-semibold bg-[var(--primary-color)] text-white': modelValue === option.value }"
                 id="listbox-option-0" role="option" @click="updateValue(option.value)">
                 <span class="block truncate" :class="{ 'font-semibold': modelValue === option.value }">{{ option.label
-                }}</span>
+                    }}</span>
 
                 <span v-if="modelValue === option.value"
                     class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">

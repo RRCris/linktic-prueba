@@ -3,9 +3,9 @@ import UINavbar from '../../components/UI/Navbar/UINavbar.vue';
 
 </script>
 <template>
-    <div class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col bg-gray-50-100 dark:bg-gray-900 text-black dark:text-white ">
         <UINavbar />
-        <div class="grow p-2 md:p-5 lg:p-10 max-w-[1300px] w-full mx-auto mt-[55px] bg-amber-100 dark:bg-blue-950">
+        <div class="grow p-2 md:p-5 lg:p-10 max-w-[1300px] w-full mx-auto mt-[55px] ">
             <router-view></router-view>
         </div>
         <footer className="bg-gray-800 text-white py-5 mt-8 ">
