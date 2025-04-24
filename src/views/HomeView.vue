@@ -56,7 +56,7 @@ const startDelay = computed(() => itemsLoadings.value.length - 20)
         <div v-else-if="isError" class="h-screen flex flex-col items-center justify-center"> {{ errorMessage }}</div>
         <div v-else-if="itemsLoadings">
             <!-- listado de personajes -->
-            <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <TransitionGroup name="slide-bounce" tag="ul" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 <CardCharacter v-for="(character, i) in itemsLoadings" :key="character.id" :character="character"
                     :delay="(i - startDelay) * 160" />
             </TransitionGroup>
