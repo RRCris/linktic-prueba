@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import UINavbar from '../../components/UI/Navbar/UINavbar.vue';
+
 </script>
 <template>
     <div class="min-h-screen flex flex-col">
-        <div class="grow p-2 md:p-5 lg:p-10 max-w-[1300px] w-full mx-auto">
+        <UINavbar />
+        <div class="grow p-2 md:p-5 lg:p-10 max-w-[1300px] w-full mx-auto mt-[55px] bg-amber-100 dark:bg-blue-950">
             <router-view></router-view>
         </div>
         <footer className="bg-gray-800 text-white py-5 mt-8 ">

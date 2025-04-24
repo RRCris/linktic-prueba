@@ -42,6 +42,7 @@ const itemsLoadings = computed(() => accumulative.value.map(dt => dt.results).fl
 const startDelay = computed(() => itemsLoadings.value.length - 20)
 
 
+
 </script>
 
 <template>
